@@ -19,7 +19,7 @@
             <table>
                 <tr>
                     <th colspan="2">
-                        Acceso
+                        Acceso:
                     </th>
                 </tr>
                 <tr>
