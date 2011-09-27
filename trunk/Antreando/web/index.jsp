@@ -14,7 +14,6 @@
     <body>
     <center>
         
-       
         <form name="frmAcceso" onsubmit="return validaVacios();" action="paginas/login.jsp" method="post">
             <table>
                 <tr>
