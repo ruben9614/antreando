@@ -20,5 +20,6 @@ public interface IBaseDao {
     //int updateByCriteria(IBaseDto dto, String criterio);
     int deleteById(Integer id);
     //int deleteByCriteria(String criterio);
+    IBaseDto selectLogin(IBaseDto dto);
     
 }

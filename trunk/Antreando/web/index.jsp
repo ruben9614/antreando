@@ -10,11 +10,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
+        
+        <script language="JavaScript" type="text/javascript">
+            function validaVacios(){
+                if(document.frmAcceso.usr.value != null || document.frmAcceso.pwd.value != null){
+                    document.frmAcceso.submit();
+                }else{
+                    alert("Llenar usuario");
+                }
+            }
+        </script>
     </head>
     <body>
     <center>
-        
-        <form name="frmAcceso" onsubmit="return validaVacios();" action="paginas/login.jsp" method="post">
+        <form name="frmAcceso" action="paginas/bienvenido.jsp">
             <table>
                 <tr>
                     <th colspan="2">
@@ -26,7 +35,7 @@
                         Usuario:
                     </th>
                     <td>
-                        <input type="text" name="usr">
+                        <input type="text" name="usr" id="usr">
                     </td>
                 </tr>
                 <tr>
@@ -34,7 +43,7 @@
                         Contraseña:
                     </th>
                     <td>
-                        <input type="password" name="pwd">
+                        <input type="password" name="pwd" id="pwd">
                     </td>
                 </tr>
                 <tr>
@@ -42,27 +51,11 @@
                         
                     </th>
                     <td colspan="2">
-                        <input type="submit" name="btnAceptar" value="Enviar" onclick="validaVacios()">
+                        <input type="button" name="btnAceptar" value="Entrar" onclick="validaVacios();">
                     </td>
                 </tr>
             </table>
         </form>
-        
-        <script>
-            function validaVacios(){
-                if(document.frmAcceso.usr.value.lenght==0){
-                    alert("Llenar usuario")
-                    return 0;
-                }
-                if(document.frmAcceso.pwd.value.lenght==0){
-                    alert("Llenar contraseña")
-                    return 0;
-                }
-                
-                document.frmAcceso.submit();
-            }
-        </script>
-        
     </center> 
     </body>
 </html>
