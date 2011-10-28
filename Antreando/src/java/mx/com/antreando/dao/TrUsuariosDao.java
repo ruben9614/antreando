@@ -160,5 +160,36 @@ public class TrUsuariosDao implements IBaseDao{
         }
         return exito;
     }
+
+    
+    public IBaseDto selectLogin(IBaseDto dto) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        TrUsuariosDto usuarioDto =null;
+        try{
+            usuarioDto=(TrUsuariosDto)dto;
+            con = DaoFactory.createConnection();
+            ps = con.prepareStatement("SELECT NOMB_USUARIO, CONTRASEÑA FROM TR_USUARIOS WHERE NOMB_USUARIO=? AND CONTRASEÑA=?");
+            ps.setString(1, usuarioDto.getNombUsuario());
+            ps.setString(2, usuarioDto.getContraseña());
+            rs = ps.executeQuery();
+            if(rs.first()){
+                usuarioDto = new TrUsuariosDto();
+                usuarioDto.setNombUsuario(rs.getString("NOMB_USUARIO"));
+                usuarioDto.setContraseña(rs.getString("CONTRASEÑA"));
+            }
+            else{
+                usuarioDto = null;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            DaoFactory.closeConnection(con, ps, rs);
+        }
+        
+        return usuarioDto;
+    }
     
 }

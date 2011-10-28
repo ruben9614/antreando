@@ -144,5 +144,12 @@ public class TrReservacionesDao implements IBaseDao{
         }
         return exito;
     }
+
+    @Override
+    public IBaseDto selectLogin(IBaseDto dto) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    
     
 }
