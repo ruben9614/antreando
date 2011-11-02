@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import mx.com.antreando.dao.factory.DaoFactory;
+import mx.com.antreando.dao.general.DaoGeneral;
 import mx.com.antreando.dao.sql.SQL;
 import mx.com.antreando.dto.IBaseDto;
 import mx.com.antreando.dto.TcPromocionesDto;
@@ -28,7 +29,7 @@ public class TcPromocionesDao implements IBaseDao{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcPromocionesSelectAll);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -44,7 +45,7 @@ public class TcPromocionesDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
         return arreglo;
     }
@@ -56,7 +57,7 @@ public class TcPromocionesDao implements IBaseDao{
         PreparedStatement ps = null;
         TcPromocionesDto tcPromociones = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcPromocionesSelectById);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -72,7 +73,7 @@ public class TcPromocionesDao implements IBaseDao{
         catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
             return tcPromociones;
     }
@@ -84,7 +85,7 @@ public class TcPromocionesDao implements IBaseDao{
         int exito = 0;
         TcPromocionesDto tcPromociones = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcPromocionesInsert);
             tcPromociones = (TcPromocionesDto)dto;
             ps.setString(1, tcPromociones.getDescripcion());
@@ -95,7 +96,7 @@ public class TcPromocionesDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-        DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
@@ -107,7 +108,7 @@ public class TcPromocionesDao implements IBaseDao{
         int exito = 0;
         TcPromocionesDto tcPromociones = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcPromocionesUpdateById);
             tcPromociones = (TcPromocionesDto)dto;
             ps.setString(1, tcPromociones.getDescripcion());
@@ -118,7 +119,7 @@ public class TcPromocionesDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }return exito;
     }
 
@@ -128,7 +129,7 @@ public class TcPromocionesDao implements IBaseDao{
         PreparedStatement ps = null;
         int exito = 0;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcPromocionesDeleteById);
             ps.setInt(1, id);
             exito = ps.executeUpdate();
@@ -137,7 +138,7 @@ public class TcPromocionesDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }

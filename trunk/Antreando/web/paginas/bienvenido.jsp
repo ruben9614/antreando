@@ -21,25 +21,34 @@
         </script>
     </head>
     <body>
+    <form name="frmBienvenido">
         <%
         String user = request.getParameter("usr");
         String pass = request.getParameter("pwd");
         TrUsuariosDto usuarioDto = new TrUsuariosDto();
         usuarioDto.setNombUsuario(user);
         usuarioDto.setContraseña(pass);
-        TrUsuariosDao usuarioDao = new TrUsuariosDao();
+        TrUsuariosDao usuarioDao = (TrUsuariosDao)DaoFactory.getDao("tr_usuarios");
         usuarioDto = (TrUsuariosDto)usuarioDao.selectLogin(usuarioDto);
         if(usuarioDto != null){
         %>
         <table>
             <tr>
-                <td>
-                    Bienvenido
-                </td>
+                <th colspan="2">
+                    Bienvenido <%= user %>
+                </th>
             </tr>
             <tr>
                 <td>
-                    <%= user %>
+                    Opciones usuarios:
+                </td>
+                <td>
+                    <select name="cmbOpciones" id="cmbOpciones" onchange="">
+                        <option value="0">-Seleccione-</option>
+                        <option value="1">Alta</option>
+                        <option value="2">Baja</option>
+                        <option value="3">Cambio</option>
+                    </select>
                 </td>
             </tr>
         </table>
@@ -50,10 +59,7 @@
                 validarUsuario();
             </script>
          <% } %>
-        
-        
-        
-        
-        
+    
+    </form>
     </body>
 </html>

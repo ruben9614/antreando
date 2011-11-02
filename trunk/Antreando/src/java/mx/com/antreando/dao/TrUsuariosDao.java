@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import mx.com.antreando.dao.factory.DaoFactory;
+import mx.com.antreando.dao.general.DaoGeneral;
 import mx.com.antreando.dao.sql.SQL;
 import mx.com.antreando.dto.IBaseDto;
 import mx.com.antreando.dto.TrUsuariosDto;
@@ -28,7 +29,7 @@ public class TrUsuariosDao implements IBaseDao{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trUsuariosSelectAll);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -49,7 +50,7 @@ public class TrUsuariosDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
         return arreglo;
     }
@@ -61,7 +62,7 @@ public class TrUsuariosDao implements IBaseDao{
         PreparedStatement ps = null;
         TrUsuariosDto trUsuarios = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trUsuariosSelectById);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -81,7 +82,7 @@ public class TrUsuariosDao implements IBaseDao{
         catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
             return trUsuarios;
     }
@@ -93,7 +94,7 @@ public class TrUsuariosDao implements IBaseDao{
         int exito = 0;
         TrUsuariosDto trUsuarios = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trUsuariosInsert);
             trUsuarios = (TrUsuariosDto)dto;
             ps.setString(1, trUsuarios.getNombre());
@@ -109,7 +110,7 @@ public class TrUsuariosDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-        DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
@@ -121,7 +122,7 @@ public class TrUsuariosDao implements IBaseDao{
         int exito = 0;
         TrUsuariosDto trUsuarios = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trUsuariosUpdateById);
             trUsuarios = (TrUsuariosDto)dto;
             ps.setString(1, trUsuarios.getNombre());
@@ -137,7 +138,7 @@ public class TrUsuariosDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }return exito;
     }
 
@@ -147,7 +148,7 @@ public class TrUsuariosDao implements IBaseDao{
         PreparedStatement ps = null;
         int exito = 0;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trUsuariosDeleteById);
             ps.setInt(1, id);
             exito = ps.executeUpdate();
@@ -156,7 +157,7 @@ public class TrUsuariosDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
@@ -169,7 +170,7 @@ public class TrUsuariosDao implements IBaseDao{
         TrUsuariosDto usuarioDto =null;
         try{
             usuarioDto=(TrUsuariosDto)dto;
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement("SELECT NOMB_USUARIO, CONTRASEÑA FROM TR_USUARIOS WHERE NOMB_USUARIO=? AND CONTRASEÑA=?");
             ps.setString(1, usuarioDto.getNombUsuario());
             ps.setString(2, usuarioDto.getContraseña());
@@ -186,7 +187,7 @@ public class TrUsuariosDao implements IBaseDao{
             e.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
         
         return usuarioDto;

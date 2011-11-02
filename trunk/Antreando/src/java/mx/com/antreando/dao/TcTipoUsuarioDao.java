@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import mx.com.antreando.dao.factory.DaoFactory;
+import mx.com.antreando.dao.general.DaoGeneral;
 import mx.com.antreando.dao.sql.SQL;
 import mx.com.antreando.dto.IBaseDto;
 import mx.com.antreando.dto.TcTipoUsuarioDto;
@@ -30,7 +31,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         ResultSet rs = null;
         try {
             //
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcTipoUsuarioSelectAll);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -44,7 +45,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
         return arreglo;
     }
@@ -56,7 +57,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         PreparedStatement ps = null;
         TcTipoUsuarioDto tcTipoUsuario = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcTipoUsuarioSelectById);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -69,7 +70,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
             return tcTipoUsuario;
         }
@@ -81,7 +82,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         int exito = 0;
         TcTipoUsuarioDto tcTipoUsuario = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcTipoUsuaioInsert);
             tcTipoUsuario = (TcTipoUsuarioDto)dto;
             ps.setString(1, tcTipoUsuario.getDescripcion());
@@ -89,7 +90,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-        DaoFactory.closeConnection(con, ps);
+        DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
@@ -101,7 +102,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         int exito = 0;
         TcTipoUsuarioDto tcTipoUsuario = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcTipoUsuaioUpdateById);
             tcTipoUsuario = (TcTipoUsuarioDto)dto;
             ps.setString(1, tcTipoUsuario.getDescripcion());
@@ -110,7 +111,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }return exito;
     }
 
@@ -120,7 +121,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
         PreparedStatement ps = null;
         int exito = 0;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcTipoUsuaioDeleteById);
             ps.setInt(1, id);
             exito = ps.executeUpdate();
@@ -129,7 +130,7 @@ public class TcTipoUsuarioDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }

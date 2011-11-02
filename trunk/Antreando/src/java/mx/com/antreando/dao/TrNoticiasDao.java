@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import mx.com.antreando.dao.factory.DaoFactory;
+import mx.com.antreando.dao.general.DaoGeneral;
 import mx.com.antreando.dao.sql.SQL;
 import mx.com.antreando.dto.IBaseDto;
 import mx.com.antreando.dto.TcPromocionesDto;
@@ -29,7 +30,7 @@ public class TrNoticiasDao implements IBaseDao{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trNoticiasSelectAll);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -48,7 +49,7 @@ public class TrNoticiasDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
         return arreglo;
     }
@@ -60,7 +61,7 @@ public class TrNoticiasDao implements IBaseDao{
         PreparedStatement ps = null;
         TrNoticiasDto trNoticias = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trNoticiasSelectById);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -78,7 +79,7 @@ public class TrNoticiasDao implements IBaseDao{
         catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
             return trNoticias;
     }
@@ -90,7 +91,7 @@ public class TrNoticiasDao implements IBaseDao{
         int exito = 0;
         TrNoticiasDto trNoticias = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trNoticiasInsert);
             trNoticias = (TrNoticiasDto)dto;
             ps.setDate(1, trNoticias.getFechaCreacion());
@@ -104,7 +105,7 @@ public class TrNoticiasDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-        DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
@@ -116,7 +117,7 @@ public class TrNoticiasDao implements IBaseDao{
         int exito = 0;
         TrNoticiasDto trNoticias = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trNoticiasUpdateById);
             trNoticias = (TrNoticiasDto)dto;
             ps.setDate(1, trNoticias.getFechaCreacion());
@@ -130,7 +131,7 @@ public class TrNoticiasDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }return exito;
     }
 
@@ -140,7 +141,7 @@ public class TrNoticiasDao implements IBaseDao{
         PreparedStatement ps = null;
         int exito = 0;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.trNoticiasDeleteById);
             ps.setInt(1, id);
             exito = ps.executeUpdate();
@@ -149,7 +150,7 @@ public class TrNoticiasDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
