@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import mx.com.antreando.dao.factory.DaoFactory;
+import mx.com.antreando.dao.general.DaoGeneral;
 import mx.com.antreando.dao.sql.SQL;
 import mx.com.antreando.dto.IBaseDto;
 import mx.com.antreando.dto.TcZonaDto;
@@ -28,7 +29,7 @@ public class TcZonaDao implements IBaseDao{
         ResultSet rs = null;
         try {
             //
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcZonaSelectAll);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -42,7 +43,7 @@ public class TcZonaDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
         return arreglo;
     }
@@ -54,7 +55,7 @@ public class TcZonaDao implements IBaseDao{
         PreparedStatement ps = null;
         TcZonaDto tcZona = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcZonaSelectById);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -67,7 +68,7 @@ public class TcZonaDao implements IBaseDao{
         catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps, rs);
+            DaoGeneral.closeConnection(con, ps, rs);
         }
             return tcZona;
         }
@@ -79,7 +80,7 @@ public class TcZonaDao implements IBaseDao{
         int exito = 0;
         TcZonaDto tcZona = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcZonaInsert);
             tcZona = (TcZonaDto)dto;
             ps.setString(1, tcZona.getDescripcion());
@@ -87,7 +88,7 @@ public class TcZonaDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-        DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
@@ -99,7 +100,7 @@ public class TcZonaDao implements IBaseDao{
         int exito = 0;
         TcZonaDto tcZona = null;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcZonaUpdateById);
             tcZona = (TcZonaDto)dto;
             ps.setString(1, tcZona.getDescripcion());
@@ -108,7 +109,7 @@ public class TcZonaDao implements IBaseDao{
         }catch(Exception ex){
             ex.printStackTrace();
         }finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }return exito;
     }
 
@@ -118,7 +119,7 @@ public class TcZonaDao implements IBaseDao{
         PreparedStatement ps = null;
         int exito = 0;
         try{
-            con = DaoFactory.createConnection();
+            con = DaoGeneral.createConnection();
             ps = con.prepareStatement(SQL.tcZonaDeleteById);
             ps.setInt(1, id);
             exito = ps.executeUpdate();
@@ -127,7 +128,7 @@ public class TcZonaDao implements IBaseDao{
             ex.printStackTrace();
         }
         finally{
-            DaoFactory.closeConnection(con, ps);
+            DaoGeneral.closeConnection(con, ps);
         }
         return exito;
     }
