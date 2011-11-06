@@ -105,7 +105,6 @@ public class TrUsuariosDao implements IBaseDao{
             ps.setString(6, trUsuarios.getNombUsuario());
             ps.setString(7, trUsuarios.getContraseña());
             ps.setInt(8, trUsuarios.getIdTipoUsuario());
-            ps.setInt(9, trUsuarios.getIdUsuario());
             exito = ps.executeUpdate();
         }catch(Exception ex){
             ex.printStackTrace();
