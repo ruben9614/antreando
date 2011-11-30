@@ -36,7 +36,7 @@ public class TcCategoriaDao implements IBaseDao{
             while(rs.next()){
                 tcCategoria= new TcCategoriaDto();
                 tcCategoria.setIdCategoria(rs.getInt("ID_CATEGORIA"));
-                tcCategoria.setDescripcion(rs.getString("CARRERA"));
+                tcCategoria.setDescripcion(rs.getString("DESCRIPCION"));
                 arreglo.add(tcCategoria);
             }
         }

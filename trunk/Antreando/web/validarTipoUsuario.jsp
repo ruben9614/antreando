@@ -13,7 +13,12 @@
 <head>
 <title>Antreando</title>
         <script language="JavaScript" type="text/javascript">
-          ns4 = (document.layers)? true:false
+            function validarUsuario(){
+                alert("No identificado");
+                location.href="login.html";
+            }
+            
+                        ns4 = (document.layers)? true:false
           ie4 = (document.all)? true:false
 
           function loadSource(id,nestref, url, parametros) {
@@ -71,15 +76,50 @@
         <div class="article">
         <form name="frmBienvenido">
             <IFRAME STYLE="display:none" NAME="bufferCapa"></IFRAME>
-        <table>
-            <tr>
-                <th colspan="2">
-                    Bienvenido usuario: <%= session.getAttribute("usuario") %>
-                </th>
-            </tr>
-        </table>    
+        <%
+        String user = request.getParameter("usr");
+        String pass = request.getParameter("pwd");
+        TrUsuariosDto usuarioDto = new TrUsuariosDto();
+        usuarioDto.setNombUsuario(user);
+        usuarioDto.setContraseña(pass);
+        TrUsuariosDao usuarioDao = (TrUsuariosDao)DaoFactory.getDao("tr_usuarios");
+        TrUsuariosDto exito = (TrUsuariosDto)usuarioDao.selectLogin(usuarioDto);
+        if(exito != null){
+            session.setAttribute("idUsuario", exito.getIdUsuario());
+            session.setAttribute("usuario", exito.getNombUsuario());
+            session.setAttribute("idTipoUsuario", exito.getIdTipoUsuario());
+            if(exito.getIdTipoUsuario() == 1){
+        %>
+        <script>location.href="bienvenidoAdmin.jsp"; </script>
+        <%
+               }else{
+                if(exito.getIdTipoUsuario() == 2){
+                    %>
+                    <script>
+                        location.href="bienvenidoDuenio.jsp";
+                    </script>
+                    <%
+                          }else{
+                    if(exito.getIdTipoUsuario() == 3){
+                        %>
+                        <script>
+                            location.href="bienvenido.jsp";
+                        </script>
+                   <%             
+                    }
+                }
+               }
+                       }else{
+            %>
+            <script>validarUsuario();</script>
+              <%         }
+            %>
+        
+    
     </form>
+            
         </div>	
+        
       </div>
       <div class="sidebar">
         <div class="gadget">
@@ -88,7 +128,6 @@
           <ul class="sb_menu">
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html">Cerrar sesion</a></li>
-            <li><a href="reservaciones/registroReservar.jsp">Reservar</a></li>
             <li><a href="#">Blog</a></li>
           </ul>
           <h2 class="star"><span></span>Conocenos</h2>
@@ -121,4 +160,3 @@
 </div>
 </body>
 </html>
-

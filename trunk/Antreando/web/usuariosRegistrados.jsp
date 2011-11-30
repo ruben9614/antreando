@@ -4,6 +4,10 @@
     Author     : Arizmendi
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="mx.com.antreando.dto.IBaseDto"%>
+<%@page import="mx.com.antreando.dao.IBaseDao"%>
+<%@page import="java.util.List"%>
 <%@page import="mx.com.antreando.dao.factory.DaoFactory"%>
 <%@page import="mx.com.antreando.dao.TrUsuariosDao"%>
 <%@page import="mx.com.antreando.dto.TrUsuariosDto"%>
@@ -30,6 +34,10 @@
 
           function loadSourceFinish(id) {
             if (ie4) document.all[id].innerHTML = bufferCapa.document.body.innerHTML
+          }
+          
+          function eliminarUsr(idUsr){
+              location.href="eliminarUsuario.jsp?idUsr="+idUsr;
           }
         </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -69,16 +77,81 @@
       <div class="mainbar">
           
         <div class="article">
-        <form name="frmBienvenido">
+        <form name="frmUsuariosRegistrados">
+            <center>
             <IFRAME STYLE="display:none" NAME="bufferCapa"></IFRAME>
-        <table>
-            <tr>
-                <th colspan="2">
-                    Bienvenido usuario: <%= session.getAttribute("usuario") %>
-                </th>
-            </tr>
-        </table>    
-    </form>
+            <%
+            TrUsuariosDao usuarioDao = (TrUsuariosDao)DaoFactory.getDao("tr_usuarios");
+            List<IBaseDto> lista = usuarioDao.selectAll();
+            %>
+                <table border="1">
+                    <tr>
+                        <td>
+                            Id
+                        </td>
+                        <td>
+                            Nombre
+                        </td>
+                        <td>
+                            App
+                        </td>
+                        <td>
+                            Apm
+                        </td>
+                        <td>
+                            FechaNac
+                        </td>
+                        <td>
+                            Email
+                        </td>
+                        <td>
+                            Usuario
+                        </td>
+                        <td>
+                            Tipo usuario
+                        </td>
+                        <td>
+                            Eliminar
+                        </td>
+                    </tr>
+                    <%
+                    for(Iterator iterador = lista.listIterator(); iterador.hasNext(); ){
+                    TrUsuariosDto usuarioDto=(TrUsuariosDto)iterador.next();
+                    %>
+                    <tr>
+                        <td>
+                            <%=usuarioDto.getIdUsuario()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getNombre()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getApellidoP()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getApellidoM()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getFechaNac()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getEmail()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getNombUsuario()%>
+                        </td>
+                        <td>
+                            <%=usuarioDto.getIdTipoUsuario()%>
+                        </td>
+                        <td>
+                            <img src="recursos/images/eliminar.png" height="25" width="25" onclick="eliminarUsr(<%=usuarioDto.getIdUsuario()%>)">Eliminar</img>
+                        </td>
+                    </tr>
+                    
+                    <% } %>
+                </table>
+            </center>
+        </form>
         </div>	
       </div>
       <div class="sidebar">
@@ -86,9 +159,11 @@
           <h2 class="star"><span></span>Menu</h2>
           <div class="clr"></div>
           <ul class="sb_menu">
-            <li><a href="index.html">Home</a></li>
+              <li><a href="bienvenidoAdmin.jsp.html">Home</a></li>
             <li><a href="index.html">Cerrar sesion</a></li>
-            <li><a href="reservaciones/registroReservar.jsp">Reservar</a></li>
+            <li><a href="usuarioAdmin/registroUsuarioAdmin.jsp">Agregar administrador</a></li>
+            <li><a href="usuarioDuenio/registroUsuarioDuenio.jsp">Agregar due&ntilde;o</a></li>
+            <li><a href="usuariosRegistrados.jsp">Usuarios registrados</a></li>
             <li><a href="#">Blog</a></li>
           </ul>
           <h2 class="star"><span></span>Conocenos</h2>

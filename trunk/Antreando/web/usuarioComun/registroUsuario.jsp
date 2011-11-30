@@ -11,6 +11,8 @@
 <title>Antreando</title>
         <script language="JavaScript" type="text/javascript">
             var password = /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/ ;
+            var email= /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/ ;
+            var fecha = /(\d{4})-(?:(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-2])|(0[1-9]|' . '[1-2][0-9]|3[0-2])-(0[1-9]|1[0-2]))/;
             function validarContra(){
                 if(document.frmRegistroUsuario.txtContra1.value != document.frmRegistroUsuario.txtContra2.value){
                     alert("La contraseña no concuerda")
@@ -19,9 +21,43 @@
                     alert("Contraseña muy debil")
                     }
                     else{
-                        document.frmRegistroUsuario.submit();
+                        if(!email.test(document.frmRegistroUsuario.txtEmail.value)){
+                            alert("Email incorrecto")
+                        }
+                    else{
+                        if(!fecha.test(document.frmRegistroUsuario.txtFechaNac.value)){
+                            alert("Fecha incorrecta")
+                        }else{
+                            if(document.frmRegistroUsuario.txtNombre.value==""){
+                                alert("Nombre");
+                            }else{
+                                if(document.frmRegistroUsuario.txtApp.value==""){
+                                    alert("Apellído paterno");
+                                }else{
+                                    if(document.frmRegistroUsuario.txtApm.value==""){
+                                        alert("Apellído materno");
+                                    }else{
+                                        if(document.frmRegistroUsuario.txtFechaNac.value==""){
+                                            alert("Fecha nacimiento");
+                                        }else{
+                                            if(document.frmRegistroUsuario.txtEmail.value==""){
+                                                alert("Email");
+                                            }else{
+                                                if(document.frmRegistroUsuario.txtUsuario.value==""){
+                                                    alert("Usuario");
+                                                }else{
+                                                    document.frmRegistroUsuario.submit();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        
+                        }
                     }
                 }
+            }
             }
         </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -97,7 +133,7 @@
                             Fecha de nacimiento:
                         </td>
                         <td>
-                            <input type="text" id="txtFechaNac" name="txtFechaNac"></input>
+                            <input type="text" id="txtFechaNac" name="txtFechaNac"></input>(AAAA-MM-DD)
                         </td>
                     </tr>
                     <tr>

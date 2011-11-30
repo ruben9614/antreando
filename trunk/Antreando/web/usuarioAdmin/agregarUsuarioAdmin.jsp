@@ -17,7 +17,7 @@
         <script language="JavaScript" type="text/javascript">
             function usuarioEncontrado(){
                 alert("Usuario agregado con éxito")
-                location.href="../index.html";
+                location.href="../bienvenidoAdmin.jsp";
             }
         </script>
     </head>
@@ -32,19 +32,21 @@
         usuarioDto.setEmail(request.getParameter("txtEmail"));
         usuarioDto.setNombUsuario(request.getParameter("txtUsuario"));
         usuarioDto.setContraseña(request.getParameter("txtContra1"));
-        usuarioDto.setIdTipoUsuario(3);
+        usuarioDto.setIdTipoUsuario(1);
         TrUsuariosDao usuarioDao = (TrUsuariosDao)DaoFactory.getDao("tr_usuarios");
         int exito = usuarioDao.insert(usuarioDto);
         if(exito==1){
         %>
-        <script> usuarioEncontrado(); </script>
+        <script>usuarioEncontrado();</script>
         <% }
            else{
                System.out.println("Error");
                }
-         }catch(Exception ex){
+         }catch(Exception ex){    
+         %>
+         <script>alert("Error al agregar usuario"); location.href="../bienvenidoAdmin.jsp";  </script>
+         <%
+                 } 
         %>
-        <script> alert("Error al agregar usuario"); location.href="../index.html"; </script>
-        <% } %>
     </body>
 </html>
