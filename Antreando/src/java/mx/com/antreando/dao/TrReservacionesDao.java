@@ -93,7 +93,6 @@ public class TrReservacionesDao implements IBaseDao{
             ps.setInt(2, trReservaciones.getNumMesas());
             ps.setInt(3, trReservaciones.getIdUsuarioR());
             ps.setInt(4, trReservaciones.getIdAntroR());
-            ps.setInt(5, trReservaciones.getIdReservacion());
             exito = ps.executeUpdate();
         }catch(Exception ex){
             ex.printStackTrace();
@@ -150,6 +149,7 @@ public class TrReservacionesDao implements IBaseDao{
     public IBaseDto selectLogin(IBaseDto dto) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
 
     
     

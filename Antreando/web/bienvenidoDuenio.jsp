@@ -71,10 +71,15 @@
         <div class="article">
         <form name="frmBienvenido">
             <IFRAME STYLE="display:none" NAME="bufferCapa"></IFRAME>
+            <%
+            HttpSession session1 = request.getSession();
+            session.getAttribute("idUsuario");
+            //Integer idUsuario = (Integer)session.getAttribute("idUsuario");
+            %>
         <table>
             <tr>
                 <th colspan="2">
-                    Bienvenido usuario: <%= session.getAttribute("usuario") %>
+                    Bienvenido due&ntilde;o <%= session.getAttribute("usuario") %>
                 </th>
             </tr>
         </table>    
@@ -88,16 +93,17 @@
           <ul class="sb_menu">
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html">Cerrar sesion</a></li>
-            <li><a href="reservaciones/registroReservar.jsp">Reservar</a></li>
+            <li><a href="agregarEstablecimiento.jsp">Agregar establecimiento</a></li>
+            <li><a href="#">Ver reservaciones</a></li>
             <li><a href="#">Blog</a></li>
           </ul>
           <h2 class="star"><span></span>Conocenos</h2>
             <ul class="sb_menu">
-            <li><a href="#">Quiénes somos</a></li>
-            <li><a href="#">Misión y visión</a></li>
-            <li><a href="#">Políticas</a></li>
-            <li><a href="#">Valores</a></li>
-          </ul>
+                <li><a href="#">Quiénes somos</a></li>
+                <li><a href="#">Misión y visión</a></li>
+                <li><a href="#">Políticas</a></li>
+                <li><a href="#">Valores</a></li>
+            </ul>
         </div>
       </div>
 	  

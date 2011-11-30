@@ -170,14 +170,16 @@ public class TrUsuariosDao implements IBaseDao{
         try{
             usuarioDto=(TrUsuariosDto)dto;
             con = DaoGeneral.createConnection();
-            ps = con.prepareStatement("SELECT NOMB_USUARIO, CONTRASEÑA FROM TR_USUARIOS WHERE NOMB_USUARIO=? AND CONTRASEÑA=?");
+            ps = con.prepareStatement("SELECT ID_USUARIO,NOMB_USUARIO, CONTRASEÑA, IDTC_TIPOUSUARIO FROM TR_USUARIOS WHERE NOMB_USUARIO=? AND CONTRASEÑA=?");
             ps.setString(1, usuarioDto.getNombUsuario());
             ps.setString(2, usuarioDto.getContraseña());
             rs = ps.executeQuery();
             if(rs.first()){
                 usuarioDto = new TrUsuariosDto();
+                usuarioDto.setIdUsuario(rs.getInt("ID_USUARIO"));
                 usuarioDto.setNombUsuario(rs.getString("NOMB_USUARIO"));
                 usuarioDto.setContraseña(rs.getString("CONTRASEÑA"));
+                usuarioDto.setIdTipoUsuario(rs.getInt("IDTC_TIPOUSUARIO"));
             }
             else{
                 usuarioDto = null;

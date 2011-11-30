@@ -108,7 +108,6 @@ public class TrAntroDao implements IBaseDao{
             ps.setInt(7, trAntro.getIdZona());
             ps.setInt(8, trAntro.getIdCategoria());
             ps.setInt(9, trAntro.getIdUsuario());
-            ps.setInt(10, trAntro.getIdAntro());
             exito = ps.executeUpdate();
         }catch(Exception ex){
             ex.printStackTrace();

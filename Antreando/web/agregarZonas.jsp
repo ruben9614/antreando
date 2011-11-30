@@ -31,6 +31,14 @@
           function loadSourceFinish(id) {
             if (ie4) document.all[id].innerHTML = bufferCapa.document.body.innerHTML
           }
+          
+          function validarZona(){
+              if(document.frmZona.txtZona.value != ""){
+                  document.frmZona.submit();
+              }else{
+                  alert("Colocar zona");
+              }
+          }
         </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="recursos/css/style.css" rel="stylesheet" type="text/css" />
@@ -69,12 +77,23 @@
       <div class="mainbar">
           
         <div class="article">
-        <form name="frmBienvenido">
+            <form name="frmZona" action="zona/agregarZonaJSP.jsp">
             <IFRAME STYLE="display:none" NAME="bufferCapa"></IFRAME>
         <table>
             <tr>
+                <th colspan="2"></th>
+            </tr>
+            <tr>
+                <td>
+                    Zona
+                </td>
+                <td>
+                    <input type="text" name="txtZona" id="txtZona"></input>
+                </td>
+            </tr>
+            <tr>
                 <th colspan="2">
-                    Bienvenido usuario: <%= session.getAttribute("usuario") %>
+                    <input type="button" name="btnAceptar" value="Aceptar" onclick="validarZona();"></input>
                 </th>
             </tr>
         </table>    
@@ -86,9 +105,13 @@
           <h2 class="star"><span></span>Menu</h2>
           <div class="clr"></div>
           <ul class="sb_menu">
-            <li><a href="index.html">Home</a></li>
+              <li><a href="bienvenidoAdmin.jsp.html">Home</a></li>
             <li><a href="index.html">Cerrar sesion</a></li>
-            <li><a href="reservaciones/registroReservar.jsp">Reservar</a></li>
+            <li><a href="usuarioAdmin/registroUsuarioAdmin.jsp">Agregar administrador</a></li>
+            <li><a href="usuarioDuenio/registroUsuarioDuenio.jsp">Agregar due&ntilde;o</a></li>
+            <li><a href="agregarZonas.jsp">Agregar zona</a> </li>
+            <li><a href="agregarCategoria.jsp">Agregar categor&iacute;a</a> </li>
+            <li><a href="usuariosRegistrados.jsp">Usuarios registrados</a></li>
             <li><a href="#">Blog</a></li>
           </ul>
           <h2 class="star"><span></span>Conocenos</h2>
@@ -121,4 +144,3 @@
 </div>
 </body>
 </html>
-
